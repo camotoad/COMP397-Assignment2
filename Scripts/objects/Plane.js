@@ -47,7 +47,13 @@ var objects;
                 var newPositionX = (config.Game.KEYBOARD_MANAGER.MoveRight) ?
                     this.position.x + this._horizontalSpeed : this.position.x - this._horizontalSpeed;
                 // TODO: make movement smoother with a velocity function
-                this.position = new objects.Vector2(newPositionX, this._verticalPosition);
+                this.position = new objects.Vector2(newPositionX, this.position.y);
+            }
+            if ((config.Game.KEYBOARD_MANAGER.MoveUp || (config.Game.KEYBOARD_MANAGER.MoveDown))) {
+                var newPositionY = (config.Game.KEYBOARD_MANAGER.MoveDown) ?
+                    this.position.y + this._horizontalSpeed : this.position.y - this._horizontalSpeed;
+                // TODO: make movement smoother with a velocity function
+                this.position = new objects.Vector2(this.position.x, newPositionY);
             }
             this._bulletSpawn = new objects.Vector2(this.position.x, this.position.y - this.halfHeight);
         };
@@ -75,7 +81,8 @@ var objects;
         };
         Plane.prototype.FireBullets = function () {
             var bullet = config.Game.BULLET_MANAGER.GetBullet();
-            bullet.position = this._bulletSpawn;
+            if (bullet.position.y < 0) // 1 bullet at a time
+                bullet.position = this._bulletSpawn;
         };
         return Plane;
     }(objects.GameObject));

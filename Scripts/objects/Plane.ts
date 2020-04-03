@@ -49,7 +49,17 @@ module objects
 
                 // TODO: make movement smoother with a velocity function
 
-                this.position = new Vector2(newPositionX, this._verticalPosition);
+                this.position = new Vector2(newPositionX, this.position.y);
+            }
+
+            if ((config.Game.KEYBOARD_MANAGER.MoveUp || (config.Game.KEYBOARD_MANAGER.MoveDown)))
+            {
+                let newPositionY = (config.Game.KEYBOARD_MANAGER.MoveDown) ? 
+                this.position.y + this._horizontalSpeed : this.position.y - this._horizontalSpeed;
+
+                // TODO: make movement smoother with a velocity function
+
+                this.position = new Vector2(this.position.x , newPositionY);
             }
             
             this._bulletSpawn = new Vector2(this.position.x, this.position.y - this.halfHeight);
@@ -91,6 +101,7 @@ module objects
         public FireBullets(): void
         {
             let bullet = config.Game.BULLET_MANAGER.GetBullet();
+            if (bullet.position.y < 0) // 1 bullet at a time
             bullet.position = this._bulletSpawn;
         }
 

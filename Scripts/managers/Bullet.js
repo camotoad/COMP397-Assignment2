@@ -10,7 +10,7 @@ var managers;
         // PRIVATE METHODS
         Bullet.prototype._buildBulletPool = function () {
             // initialize bullet number
-            this._bulletNumber = 100;
+            this._bulletNumber = 1;
             // create an empty container
             this._bulletPool = new Array();
             for (var count = 0; count < this._bulletNumber; count++) {

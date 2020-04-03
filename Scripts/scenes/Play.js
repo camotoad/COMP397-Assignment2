@@ -29,13 +29,7 @@ var scenes;
         Play.prototype.Start = function () {
             this._ocean = new objects.Ocean();
             this._plane = new objects.Plane();
-            this._island = new objects.Island();
-            // create the cloud array
-            this._clouds = new Array(); // empty container
-            // instantiating CLOUD_NUM clouds
-            for (var index = 0; index < config.Game.CLOUD_NUM; index++) {
-                this._clouds.push(new objects.Cloud());
-            }
+            this._enemy = new objects.Enemy();
             this._scoreBoard = new managers.ScoreBoard();
             config.Game.SCORE_BOARD = this._scoreBoard;
             this._bulletManager = new managers.Bullet();
@@ -45,31 +39,33 @@ var scenes;
             this.Main();
         };
         Play.prototype.Update = function () {
-            var _this = this;
             this._ocean.Update();
             this._plane.Update();
+            this._enemy.Update();
             this._bulletManager.Update();
-            this._island.Update();
-            managers.Collision.AABBCheck(this._plane, this._island);
-            this._clouds.forEach(function (cloud) {
-                cloud.Update();
-                managers.Collision.squaredRadiusCheck(_this._plane, cloud);
-            });
         };
         Play.prototype.Main = function () {
+            var _this = this;
             this.addChild(this._ocean);
-            this.addChild(this._island);
             this.addChild(this._plane);
+            this.addChild(this._enemy);
             this._bulletManager.AddBulletsToScene(this);
-            for (var _i = 0, _a = this._clouds; _i < _a.length; _i++) {
-                var cloud = _a[_i];
-                this.addChild(cloud);
-            }
             this.addChild(this._scoreBoard.LivesLabel);
             this.addChild(this._scoreBoard.ScoreLabel);
+            var count = 10;
+            var minspeed = 20;
+            var interval = window.setInterval(function () {
+                config.Game.SCORE_BOARD.Score += 10; // each second the player gains 10 points
+                count++;
+                _this._enemy.setHorizontalSpeed(util.Mathf.RandomRange(count, count + 5)); // enemy moves more pixels
+                console.log(count); // debugging/testing
+                if (count != 10 && count % 10 == 0 && minspeed > 1) //difficulty spikes more every 10 seconds
+                 {
+                    _this._enemy.setTickSpeed(minspeed - 1);
+                }
+            }, 1000);
         };
         Play.prototype.Clean = function () {
-            this._plane.engineSound.stop();
             this.removeAllChildren();
         };
         return Play;
