@@ -6,8 +6,13 @@ module objects
         private _verticalPosition:number;
         private _bulletSpawn: objects.Vector2;
         private _horizontalSpeed: number;
+        private _backMusic: createjs.AbstractSoundInstance;
         
         // PUBLIC PROPERTIES
+        public get backSound() : createjs.AbstractSoundInstance 
+        {
+            return this._backMusic;
+        }
 
         // CONSTRUCTOR
         constructor()
@@ -77,9 +82,9 @@ module objects
         {
             this.type = enums.GameObjectType.PLANE;
             this._verticalPosition = 430; // locked to the bottom of the screen
-            // this._engineSound = createjs.Sound.play("engine");
-            // this._engineSound.loop = -1; // loop forever
-            // this._engineSound.volume = 0.1; // 10% volume
+            this._backMusic = createjs.Sound.play("background");
+            this._backMusic.loop = -1; // loop forever
+            this._backMusic.volume = 0.1; // 10% volume
             this._horizontalSpeed = 7;
             this.position = new objects.Vector2(config.Game.SCREEN_WIDTH * 0.5, this._verticalPosition);
         }

@@ -83,6 +83,7 @@ var scenes;
             }, 1000);
         };
         Play.prototype.Clean = function () {
+            this._player.backSound.stop();
             this.removeAllChildren();
         };
         return Play;

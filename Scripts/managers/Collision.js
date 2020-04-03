@@ -76,14 +76,18 @@ var managers;
                 case enums.GameObjectType.ENEMY:
                     {
                         console.log("got hit!");
-                        var oofSound = createjs.Sound.play("oof");
-                        oofSound.volume = 0.2;
+                        if (config.Game.SCENE != scenes.State.END) {
+                            var oofSound = createjs.Sound.play("oof");
+                            oofSound.volume = 0.2;
+                        }
                         config.Game.SCORE_BOARD.Lives -= 1;
                         if (config.Game.LIVES < 1) {
                             if (config.Game.SCORE > config.Game.HIGH_SCORE) {
                                 config.Game.HIGH_SCORE = config.Game.SCORE;
                             }
                             config.Game.SCENE = scenes.State.END;
+                            var sadSound = createjs.Sound.play("sad");
+                            sadSound.volume = 0.1;
                         }
                         break;
                     }

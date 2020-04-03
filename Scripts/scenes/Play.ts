@@ -115,6 +115,7 @@ module scenes
 
         public Clean(): void
         {
+            this._player.backSound.stop();
             this.removeAllChildren();
         }
 

@@ -17,6 +17,8 @@ var Game = (function () {
         { id: "oof", src: "./Assets/audio/oof.mp3" },
         { id: "lightning", src: "./Assets/audio/lightning.mp3" },
         { id: "boom", src: "./Assets/audio/boom.mp3" },
+        { id: "sad", src: "./Assets/audio/sadviolin.mp3" },
+        { id: "background", src: "./Assets/audio/Riddles_of_Labyrinth.mp3" }
     ];
     var spriteData = {
         "images": {},
