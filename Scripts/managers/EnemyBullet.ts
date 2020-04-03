@@ -1,6 +1,6 @@
 module managers
 {
-    export class Bullet 
+    export class EnemyBullet 
     {
         // PRIVATE INSTANCE MEMBERS
         private _bulletNumber: number;
@@ -19,7 +19,7 @@ module managers
         private _buildBulletPool():void
         {
             // initialize bullet number
-            this._bulletNumber = 1;
+            this._bulletNumber = 50;
 
             // create an empty container
             this._bulletPool = new Array<objects.Bullet>();

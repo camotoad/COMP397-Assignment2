@@ -34,6 +34,8 @@ var scenes;
             config.Game.SCORE_BOARD = this._scoreBoard;
             this._bulletManager = new managers.Bullet();
             config.Game.BULLET_MANAGER = this._bulletManager;
+            this._enemyBulletManager = new managers.EnemyBullet();
+            config.Game.ENEMY_BULLET = this._enemyBulletManager;
             this._keyboardManager = new managers.Keyboard();
             config.Game.KEYBOARD_MANAGER = this._keyboardManager;
             this.Main();
@@ -42,7 +44,9 @@ var scenes;
             this._background.Update();
             this._player.Update();
             this._enemy.Update();
+            this._enemyBulletManager.Update();
             this._bulletManager.Update();
+            managers.Collision.AABBCheck(this._player, this._enemyBulletManager.GetBullet());
             if (managers.Collision.AABBCheck(this._bulletManager.GetBullet(), this._enemy)) {
                 console.log("Collision with enemy!");
                 var boomSound = createjs.Sound.play("boom");
@@ -53,9 +57,6 @@ var scenes;
                     config.Game.HIGH_SCORE = config.Game.SCORE;
                 }
             }
-            if (managers.Collision.AABBCheck(this._player, this._enemy)) {
-                console.log("Collision");
-            }
         };
         Play.prototype.Main = function () {
             var _this = this;
@@ -63,11 +64,13 @@ var scenes;
             this.addChild(this._player);
             this.addChild(this._enemy);
             this._bulletManager.AddBulletsToScene(this);
+            this._enemyBulletManager.AddBulletsToScene(this);
             this.addChild(this._scoreBoard.LivesLabel);
             this.addChild(this._scoreBoard.ScoreLabel);
             var count = 10;
             var minspeed = 20;
             var interval = window.setInterval(function () {
+                _this.Update();
                 config.Game.SCORE_BOARD.Score += 10; // each second the player gains 10 points
                 count++;
                 _this._enemy.setHorizontalSpeed(util.Mathf.RandomRange(count, count + 20)); // enemy moves more pixels

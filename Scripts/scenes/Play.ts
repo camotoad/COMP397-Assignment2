@@ -9,6 +9,7 @@ module scenes
 
         private _scoreBoard: managers.ScoreBoard;
         private _bulletManager: managers.Bullet;
+        private _enemyBulletManager: managers.EnemyBullet;
         private _keyboardManager: managers.Keyboard;
 
         // PUBLIC PROPERTIES
@@ -39,6 +40,9 @@ module scenes
             this._bulletManager = new managers.Bullet();
             config.Game.BULLET_MANAGER = this._bulletManager;
 
+            this._enemyBulletManager = new managers.EnemyBullet();
+            config.Game.ENEMY_BULLET = this._enemyBulletManager;
+
             this._keyboardManager = new managers.Keyboard();
             config.Game.KEYBOARD_MANAGER = this._keyboardManager;
 
@@ -52,28 +56,31 @@ module scenes
            this._player.Update();
 
            this._enemy.Update();
+           
+           
+
+        this._enemyBulletManager.Update();
+
+          this._bulletManager.Update();
 
             
-          this._bulletManager.Update();
-        
+        managers.Collision.AABBCheck(this._player, this._enemyBulletManager.GetBullet());
+            
         if (managers.Collision.AABBCheck(this._bulletManager.GetBullet(), this._enemy))
-        {
-            console.log("Collision with enemy!");
-            let boomSound = createjs.Sound.play("boom");
-            boomSound.volume = 0.1;
-            this._bulletManager.collisionReset(); //reset bullet when hit so the bullet does not rack up multiple points
-            config.Game.SCORE_BOARD.Score += 200;
-            if(config.Game.SCORE > config.Game.HIGH_SCORE)
             {
-                config.Game.HIGH_SCORE = config.Game.SCORE;
+                console.log("Collision with enemy!");
+                let boomSound = createjs.Sound.play("boom");
+                boomSound.volume = 0.1;
+                this._bulletManager.collisionReset(); //reset bullet when hit so the bullet does not rack up multiple points
+                config.Game.SCORE_BOARD.Score += 200;
+                if(config.Game.SCORE > config.Game.HIGH_SCORE)
+                {
+                    config.Game.HIGH_SCORE = config.Game.SCORE;
+                }
             }
-        }
-          
-          if (managers.Collision.AABBCheck(this._player, this._enemy))
-          {
-              console.log("Collision");
-          }
-          
+
+        
+
 
         }
         
@@ -84,6 +91,7 @@ module scenes
             this.addChild(this._enemy);
 
             this._bulletManager.AddBulletsToScene(this);
+            this._enemyBulletManager.AddBulletsToScene(this);
 
             this.addChild(this._scoreBoard.LivesLabel);
 
@@ -92,6 +100,7 @@ module scenes
             let count = 10;
             let minspeed = 20;
             let interval = window.setInterval ( ()=>{
+                this.Update();
                 config.Game.SCORE_BOARD.Score += 10; // each second the player gains 10 points
                 count++;
                 this._enemy.setHorizontalSpeed(util.Mathf.RandomRange(count, count+20)); // enemy moves more pixels

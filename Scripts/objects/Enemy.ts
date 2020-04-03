@@ -4,7 +4,7 @@ module objects
     {
         // PRIVATE INSTANCE MEMBERS
         private _verticalPosition:number;
-        private _engineSound : createjs.AbstractSoundInstance;
+       
         private _bulletSpawn: objects.Vector2;
         private _horizontalSpeed: number;
         private _tickSpeed: number;
@@ -51,7 +51,7 @@ module objects
                 }
 
                 
-
+                this._bulletSpawn = new Vector2(this.position.x, this.position.y + this.halfHeight);
         }
         
         // PUBLIC METHODS
@@ -66,13 +66,22 @@ module objects
 
         public Update(): void 
         {
+            //this._move();
+
             if(createjs.Ticker.getTicks() % this._tickSpeed == 0)
             {
+                let rand = Math.floor(util.Mathf.RandomRange(1,this._tickSpeed)); // randomly fire
                 this._move();
+                //console.log(this._tickSpeed);
+                if (rand < 10)
+                {
+                    
+                    this.FireBullets();
+                }
             }
             
             this._checkBounds();
-            
+      
         }
 
         public Reset(): void 
@@ -82,7 +91,12 @@ module objects
 
         public FireBullets(): void
         {
-
+            let bullet = config.Game.ENEMY_BULLET.GetBullet();
+            bullet.velocity.y = util.Mathf.RandomRange(5,10);
+            bullet.position = this._bulletSpawn;           
+            let lightningSound = createjs.Sound.play("lightning");
+            lightningSound.volume = 0.1;
+                      
         }
 
         public setTickSpeed(newSpeed : number): void{
@@ -92,6 +106,8 @@ module objects
         public setHorizontalSpeed(newSpeed:number):void{
             this._horizontalSpeed = newSpeed;
         }
+
+        
 
         
     }

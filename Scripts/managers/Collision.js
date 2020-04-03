@@ -64,7 +64,7 @@ var managers;
                 case enums.GameObjectType.CLOUD:
                     {
                         console.log("Collision with Cloud!");
-                        var thunderSound = createjs.Sound.play("thunder");
+                        var thunderSound = createjs.Sound.play("oof");
                         thunderSound.volume = 0.2;
                         config.Game.SCORE_BOARD.Lives -= 1;
                         // check if lives falls less than 1 and then switch to END scene
@@ -73,13 +73,17 @@ var managers;
                         }
                     }
                     break;
-                case enums.GameObjectType.ENEMY:
+                case enums.GameObjectType.BULLET:
                     {
-                        console.log("Collision with enemy!");
-                        //play collision sound
-                        config.Game.SCORE_BOARD.Score += 200;
-                        if (config.Game.SCORE > config.Game.HIGH_SCORE) {
-                            config.Game.HIGH_SCORE = config.Game.SCORE;
+                        console.log("got hit!");
+                        var oofSound = createjs.Sound.play("oof");
+                        oofSound.volume = 0.2;
+                        config.Game.SCORE_BOARD.Lives -= 1;
+                        if (config.Game.LIVES < 1) {
+                            if (config.Game.SCORE > config.Game.HIGH_SCORE) {
+                                config.Game.HIGH_SCORE = config.Game.SCORE;
+                            }
+                            config.Game.SCENE = scenes.State.END;
                         }
                         break;
                     }

@@ -13,8 +13,9 @@ var Game = (function () {
     var assetManifest = [
         { id: "space", src: "./Assets/images/space.gif" },
         { id: "atlas", src: "./Assets/sprites/atlas.png" },
-        { id: "engine", src: "./Assets/audio/engine.ogg" },
         { id: "pew", src: "./Assets/audio/pew.mp3" },
+        { id: "oof", src: "./Assets/audio/oof.mp3" },
+        { id: "lightning", src: "./Assets/audio/lightning.mp3" },
         { id: "boom", src: "./Assets/audio/boom.mp3" },
     ];
     var spriteData = {

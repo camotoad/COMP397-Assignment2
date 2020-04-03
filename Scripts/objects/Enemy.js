@@ -43,6 +43,7 @@ var objects;
             else {
                 this.position = new objects.Vector2(this.position.x -= this._horizontalSpeed, this._verticalPosition);
             }
+            this._bulletSpawn = new objects.Vector2(this.position.x, this.position.y + this.halfHeight);
         };
         // PUBLIC METHODS
         Enemy.prototype.Start = function () {
@@ -53,14 +54,25 @@ var objects;
             this.position = new objects.Vector2(config.Game.SCREEN_WIDTH * 0.5, this._verticalPosition);
         };
         Enemy.prototype.Update = function () {
+            //this._move();
             if (createjs.Ticker.getTicks() % this._tickSpeed == 0) {
+                var rand = Math.floor(util.Mathf.RandomRange(1, this._tickSpeed)); // randomly fire
                 this._move();
+                //console.log(this._tickSpeed);
+                if (rand < 10) {
+                    this.FireBullets();
+                }
             }
             this._checkBounds();
         };
         Enemy.prototype.Reset = function () {
         };
         Enemy.prototype.FireBullets = function () {
+            var bullet = config.Game.ENEMY_BULLET.GetBullet();
+            bullet.velocity.y = util.Mathf.RandomRange(5, 10);
+            bullet.position = this._bulletSpawn;
+            var lightningSound = createjs.Sound.play("lightning");
+            lightningSound.volume = 0.1;
         };
         Enemy.prototype.setTickSpeed = function (newSpeed) {
             this._tickSpeed = newSpeed;

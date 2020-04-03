@@ -16,5 +16,6 @@ module config
         public static KEYBOARD_MANAGER: managers.Keyboard;
         public static TEXTURE_ATLAS: createjs.SpriteSheet;
         public static OCEAN_ATLAS: createjs.SpriteSheet;
+        public static ENEMY_BULLET : managers.EnemyBullet;
     }
 }

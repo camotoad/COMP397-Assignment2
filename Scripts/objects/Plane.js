@@ -16,20 +16,13 @@ var objects;
 (function (objects) {
     var Plane = /** @class */ (function (_super) {
         __extends(Plane, _super);
+        // PUBLIC PROPERTIES
         // CONSTRUCTOR
         function Plane() {
             var _this = _super.call(this, config.Game.TEXTURE_ATLAS, "plane", 0, 0, true) || this;
             _this.Start();
             return _this;
         }
-        Object.defineProperty(Plane.prototype, "engineSound", {
-            // PUBLIC PROPERTIES
-            get: function () {
-                return this._engineSound;
-            },
-            enumerable: true,
-            configurable: true
-        });
         // PRIVATE METHODS
         Plane.prototype._checkBounds = function () {
             // left boundary
@@ -69,9 +62,9 @@ var objects;
         Plane.prototype.Start = function () {
             this.type = enums.GameObjectType.PLANE;
             this._verticalPosition = 430; // locked to the bottom of the screen
-            this._engineSound = createjs.Sound.play("engine");
-            this._engineSound.loop = -1; // loop forever
-            this._engineSound.volume = 0.1; // 10% volume
+            // this._engineSound = createjs.Sound.play("engine");
+            // this._engineSound.loop = -1; // loop forever
+            // this._engineSound.volume = 0.1; // 10% volume
             this._horizontalSpeed = 10;
             this.position = new objects.Vector2(config.Game.SCREEN_WIDTH * 0.5, this._verticalPosition);
         };

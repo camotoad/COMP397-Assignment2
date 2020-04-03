@@ -1,16 +1,16 @@
 "use strict";
 var managers;
 (function (managers) {
-    var Bullet = /** @class */ (function () {
+    var EnemyBullet = /** @class */ (function () {
         // PUBLIC PROPERTIES
         // CONSTRUCTOR
-        function Bullet() {
+        function EnemyBullet() {
             this._buildBulletPool();
         }
         // PRIVATE METHODS
-        Bullet.prototype._buildBulletPool = function () {
+        EnemyBullet.prototype._buildBulletPool = function () {
             // initialize bullet number
-            this._bulletNumber = 1;
+            this._bulletNumber = 50;
             // create an empty container
             this._bulletPool = new Array();
             for (var count = 0; count < this._bulletNumber; count++) {
@@ -19,12 +19,12 @@ var managers;
             }
         };
         // PUBLIC METHODS
-        Bullet.prototype.AddBulletsToScene = function (scene) {
+        EnemyBullet.prototype.AddBulletsToScene = function (scene) {
             this._bulletPool.forEach(function (bullet) {
                 scene.addChild(bullet);
             });
         };
-        Bullet.prototype.GetBullet = function () {
+        EnemyBullet.prototype.GetBullet = function () {
             // remove the bullet from the front of the pool
             var bullet = this._bulletPool.shift();
             bullet.isActive = true;
@@ -33,18 +33,18 @@ var managers;
             // return a reference to the active bullet
             return bullet;
         };
-        Bullet.prototype.collisionReset = function () {
+        EnemyBullet.prototype.collisionReset = function () {
             this._bulletPool.forEach(function (bullet) {
                 bullet.Reset();
             });
         };
-        Bullet.prototype.Update = function () {
+        EnemyBullet.prototype.Update = function () {
             this._bulletPool.forEach(function (bullet) {
                 bullet.Update();
             });
         };
-        return Bullet;
+        return EnemyBullet;
     }());
-    managers.Bullet = Bullet;
+    managers.EnemyBullet = EnemyBullet;
 })(managers || (managers = {}));
-//# sourceMappingURL=Bullet.js.map
+//# sourceMappingURL=EnemyBullet.js.map
