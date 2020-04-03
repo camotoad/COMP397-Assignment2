@@ -19,7 +19,7 @@ module managers
         private _buildBulletPool():void
         {
             // initialize bullet number
-            this._bulletNumber = 50;
+            this._bulletNumber = 15;
 
             // create an empty container
             this._bulletPool = new Array<objects.Bullet>();

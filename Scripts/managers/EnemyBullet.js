@@ -10,7 +10,7 @@ var managers;
         // PRIVATE METHODS
         EnemyBullet.prototype._buildBulletPool = function () {
             // initialize bullet number
-            this._bulletNumber = 50;
+            this._bulletNumber = 15;
             // create an empty container
             this._bulletPool = new Array();
             for (var count = 0; count < this._bulletNumber; count++) {
