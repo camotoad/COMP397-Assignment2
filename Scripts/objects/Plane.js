@@ -40,6 +40,14 @@ var objects;
             if (this.position.x >= config.Game.SCREEN_WIDTH - this.halfWidth) {
                 this.position = new objects.Vector2(config.Game.SCREEN_WIDTH - this.halfWidth, this.position.y);
             }
+            //top boundary
+            if (this.position.y <= this.halfHeight) {
+                this.position = new objects.Vector2(this.position.x, 100);
+            }
+            //bottom
+            if (this.position.y >= config.Game.SCREEN_HEIGHT - this.halfHeight) {
+                this.position = new objects.Vector2(this.position.x, config.Game.SCREEN_HEIGHT - this.halfHeight);
+            }
         };
         Plane.prototype._move = function () {
             //let newPositionX = util.Mathf.Lerp(this.position.x, this.stage.mouseX, 0.05);

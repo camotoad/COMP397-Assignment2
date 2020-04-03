@@ -33,6 +33,11 @@ var managers;
             // return a reference to the active bullet
             return bullet;
         };
+        Bullet.prototype.collisionReset = function () {
+            this._bulletPool.forEach(function (bullet) {
+                bullet.Reset();
+            });
+        };
         Bullet.prototype.Update = function () {
             this._bulletPool.forEach(function (bullet) {
                 bullet.Update();

@@ -3,8 +3,8 @@ module scenes
     export class Play extends objects.Scene
     {
         // PRIVATE INSTANCE MEMBERS
-        private _ocean?: objects.Ocean;
-        private _plane?: objects.Plane;
+        private _background?: objects.Ocean;
+        private _player?: objects.Plane;
         private _enemy?: objects.Enemy;
 
         private _scoreBoard: managers.ScoreBoard;
@@ -29,8 +29,8 @@ module scenes
         public Start(): void 
         {
             
-            this._ocean = new objects.Ocean();
-            this._plane = new objects.Plane();
+            this._background = new objects.Ocean();
+            this._player = new objects.Plane();
             this._enemy = new objects.Enemy();
             
             this._scoreBoard = new managers.ScoreBoard();
@@ -47,20 +47,38 @@ module scenes
         
         public Update(): void 
         {
-           this._ocean.Update();
+           this._background.Update();
 
-           this._plane.Update();
+           this._player.Update();
 
            this._enemy.Update();
 
+            
           this._bulletManager.Update();
+        
+        if (managers.Collision.AABBCheck(this._bulletManager.GetBullet(), this._enemy))
+        {
+            console.log("Collision with enemy!");
+            this._bulletManager.collisionReset(); //reset bullet when hit so the bullet does not rack up multiple points
+            config.Game.SCORE_BOARD.Score += 200;
+            if(config.Game.SCORE > config.Game.HIGH_SCORE)
+            {
+                config.Game.HIGH_SCORE = config.Game.SCORE;
+            }
+        }
+          
+          if (managers.Collision.AABBCheck(this._player, this._enemy))
+          {
+              console.log("Collision");
+          }
+          
 
         }
         
         public Main(): void 
         {
-            this.addChild(this._ocean);
-            this.addChild(this._plane);
+            this.addChild(this._background);
+            this.addChild(this._player);
             this.addChild(this._enemy);
 
             this._bulletManager.AddBulletsToScene(this);
@@ -74,12 +92,13 @@ module scenes
             let interval = window.setInterval ( ()=>{
                 config.Game.SCORE_BOARD.Score += 10; // each second the player gains 10 points
                 count++;
-                this._enemy.setHorizontalSpeed(util.Mathf.RandomRange(count, count+5)); // enemy moves more pixels
-                console.log(count); // debugging/testing
+                this._enemy.setHorizontalSpeed(util.Mathf.RandomRange(count, count+20)); // enemy moves more pixels
+                //console.log(count); // debugging/testing
                 if (count != 10 && count%10 == 0 && minspeed > 1)//difficulty spikes more every 10 seconds
                 {
                     this._enemy.setTickSpeed(minspeed-1);
                 }
+                //window.clearInterval(interval); //end
             }, 1000);
         }
 

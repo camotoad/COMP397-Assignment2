@@ -39,6 +39,8 @@ module managers
             });
         }
 
+        
+
 
         public GetBullet():objects.Bullet
         {
@@ -52,6 +54,13 @@ module managers
 
             // return a reference to the active bullet
             return bullet;
+        }
+
+        public collisionReset() :void
+        {
+            this._bulletPool.forEach(bullet => {
+                bullet.Reset();
+            });
         }
 
         public Update()

@@ -73,6 +73,16 @@ var managers;
                         }
                     }
                     break;
+                case enums.GameObjectType.ENEMY:
+                    {
+                        console.log("Collision with enemy!");
+                        //play collision sound
+                        config.Game.SCORE_BOARD.Score += 200;
+                        if (config.Game.SCORE > config.Game.HIGH_SCORE) {
+                            config.Game.HIGH_SCORE = config.Game.SCORE;
+                        }
+                        break;
+                    }
             }
         };
         return Collision;

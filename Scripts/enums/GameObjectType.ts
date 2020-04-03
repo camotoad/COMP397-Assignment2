@@ -9,6 +9,7 @@ module enums
         BUTTON,
         PLAYER,
         BULLET,
+        ENEMY,
         UNDEFINED,
         NUM_OF_TYPES
     }

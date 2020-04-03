@@ -4,6 +4,7 @@ module objects
     {
         // PRIVATE INSTANCE MEMBERS
         private _verticalSpeed?:number;
+        private _collision?:boolean;
 
         // PUBLIC PROPERTIES
 
@@ -11,7 +12,7 @@ module objects
         constructor()
         {
             super(config.Game.TEXTURE_ATLAS, "bullet", new Vector2(), true);
-
+            
             this.Start();
         }
 
@@ -29,6 +30,7 @@ module objects
             {
                 this.Reset();
             }
+          
         }
 
         private _move():void 
@@ -44,6 +46,7 @@ module objects
             this.velocity = new Vector2(0, -this._verticalSpeed);
             this.Reset();
         }
+
 
         public Update(): void 
         {

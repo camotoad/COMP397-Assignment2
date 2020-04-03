@@ -27,8 +27,8 @@ var scenes;
         // PUBLIC METHODS
         //initialize and instatiate
         Play.prototype.Start = function () {
-            this._ocean = new objects.Ocean();
-            this._plane = new objects.Plane();
+            this._background = new objects.Ocean();
+            this._player = new objects.Plane();
             this._enemy = new objects.Enemy();
             this._scoreBoard = new managers.ScoreBoard();
             config.Game.SCORE_BOARD = this._scoreBoard;
@@ -39,15 +39,26 @@ var scenes;
             this.Main();
         };
         Play.prototype.Update = function () {
-            this._ocean.Update();
-            this._plane.Update();
+            this._background.Update();
+            this._player.Update();
             this._enemy.Update();
             this._bulletManager.Update();
+            if (managers.Collision.AABBCheck(this._bulletManager.GetBullet(), this._enemy)) {
+                console.log("Collision with enemy!");
+                this._bulletManager.collisionReset(); //reset bullet when hit so the bullet does not rack up multiple points
+                config.Game.SCORE_BOARD.Score += 200;
+                if (config.Game.SCORE > config.Game.HIGH_SCORE) {
+                    config.Game.HIGH_SCORE = config.Game.SCORE;
+                }
+            }
+            if (managers.Collision.AABBCheck(this._player, this._enemy)) {
+                console.log("Collision");
+            }
         };
         Play.prototype.Main = function () {
             var _this = this;
-            this.addChild(this._ocean);
-            this.addChild(this._plane);
+            this.addChild(this._background);
+            this.addChild(this._player);
             this.addChild(this._enemy);
             this._bulletManager.AddBulletsToScene(this);
             this.addChild(this._scoreBoard.LivesLabel);
@@ -57,12 +68,13 @@ var scenes;
             var interval = window.setInterval(function () {
                 config.Game.SCORE_BOARD.Score += 10; // each second the player gains 10 points
                 count++;
-                _this._enemy.setHorizontalSpeed(util.Mathf.RandomRange(count, count + 5)); // enemy moves more pixels
-                console.log(count); // debugging/testing
+                _this._enemy.setHorizontalSpeed(util.Mathf.RandomRange(count, count + 20)); // enemy moves more pixels
+                //console.log(count); // debugging/testing
                 if (count != 10 && count % 10 == 0 && minspeed > 1) //difficulty spikes more every 10 seconds
                  {
                     _this._enemy.setTickSpeed(minspeed - 1);
                 }
+                //window.clearInterval(interval); //end
             }, 1000);
         };
         Play.prototype.Clean = function () {
