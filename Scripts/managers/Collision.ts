@@ -80,7 +80,7 @@ module managers
                 case enums.GameObjectType.CLOUD:
                     {
                         console.log("Collision with Cloud!");
-                        let thunderSound = createjs.Sound.play("oof");
+                        let thunderSound = createjs.Sound.play("thunder");
                         thunderSound.volume = 0.2;
                         config.Game.SCORE_BOARD.Lives -= 1;
     
@@ -91,7 +91,7 @@ module managers
                         }
                     }
                     break;
-                    case enums.GameObjectType.BULLET:
+                    case enums.GameObjectType.ENEMY:
                         {
                             console.log("got hit!");
                             let oofSound = createjs.Sound.play("oof");

@@ -29,8 +29,8 @@ var scenes;
             //instantiate a new Text object
             this._welcomeLabel = new objects.Label("Space Shooter", "80px", "Consolas", "#FFFF", 320, 180, true);
             // buttons
-            this._startButton = new objects.Button("startButton", 320, 430, true);
-            this._instructionButton = new objects.Button("button", 320, 350, true);
+            this._startButton = new objects.Button("startButton2", 320, 430, true);
+            this._instructionButton = new objects.Button("instructionsButton", 320, 350, true);
             this._space = new objects.Ocean();
             this.Main();
         };

@@ -14,7 +14,7 @@ var managers;
             // create an empty container
             this._bulletPool = new Array();
             for (var count = 0; count < this._bulletNumber; count++) {
-                var bullet = new objects.Bullet();
+                var bullet = new objects.EnemyBullet();
                 this._bulletPool.push(bullet);
             }
         };

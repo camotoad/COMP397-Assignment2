@@ -11,7 +11,7 @@ module objects
         // CONSTRUCTOR
         constructor()
         {
-            super(config.Game.TEXTURE_ATLAS, "bullet", new Vector2(), true);
+            super(config.Game.TEXTURE_ATLAS, "ball1", new Vector2(), true);
             
             this.Start();
         }
@@ -41,7 +41,7 @@ module objects
         // PUBLIC METHODS
         public Start(): void 
         {
-            this.type = enums.GameObjectType.CLOUD;
+            this.type = enums.GameObjectType.ENEMY;
             this._verticalSpeed = 5; // 5 px per frame
             this.velocity = new Vector2(0, this._verticalSpeed);
             this.Reset();

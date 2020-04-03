@@ -14,7 +14,7 @@ module objects
         // CONSTRUCTOR
         constructor()
         {
-            super(config.Game.TEXTURE_ATLAS, "placeholder", 0, 0, true);
+            super(config.Game.TEXTURE_ATLAS, "enemy", 0, 0, true);
 
             this.Start();
         }
@@ -93,10 +93,12 @@ module objects
         {
             let bullet = config.Game.ENEMY_BULLET.GetBullet();
             bullet.velocity.y = util.Mathf.RandomRange(5,10);
-            bullet.position = this._bulletSpawn;           
-            let lightningSound = createjs.Sound.play("lightning");
-            lightningSound.volume = 0.1;
-                      
+            bullet.position = this._bulletSpawn;      
+            if(config.Game.SCENE != scenes.State.END)
+            {
+                let lightningSound = createjs.Sound.play("lightning");
+                lightningSound.volume = 0.1;
+            }                          
         }
 
         public setTickSpeed(newSpeed : number): void{

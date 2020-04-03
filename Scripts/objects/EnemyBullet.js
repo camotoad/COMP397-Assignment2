@@ -19,7 +19,7 @@ var objects;
         // PUBLIC PROPERTIES
         // CONSTRUCTOR
         function EnemyBullet() {
-            var _this = _super.call(this, config.Game.TEXTURE_ATLAS, "bullet", new objects.Vector2(), true) || this;
+            var _this = _super.call(this, config.Game.TEXTURE_ATLAS, "ball1", new objects.Vector2(), true) || this;
             _this.Start();
             return _this;
         }
@@ -39,7 +39,7 @@ var objects;
         };
         // PUBLIC METHODS
         EnemyBullet.prototype.Start = function () {
-            this.type = enums.GameObjectType.CLOUD;
+            this.type = enums.GameObjectType.ENEMY;
             this._verticalSpeed = 5; // 5 px per frame
             this.velocity = new objects.Vector2(0, this._verticalSpeed);
             this.Reset();

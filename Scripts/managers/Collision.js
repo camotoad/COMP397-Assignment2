@@ -64,7 +64,7 @@ var managers;
                 case enums.GameObjectType.CLOUD:
                     {
                         console.log("Collision with Cloud!");
-                        var thunderSound = createjs.Sound.play("oof");
+                        var thunderSound = createjs.Sound.play("thunder");
                         thunderSound.volume = 0.2;
                         config.Game.SCORE_BOARD.Lives -= 1;
                         // check if lives falls less than 1 and then switch to END scene
@@ -73,7 +73,7 @@ var managers;
                         }
                     }
                     break;
-                case enums.GameObjectType.BULLET:
+                case enums.GameObjectType.ENEMY:
                     {
                         console.log("got hit!");
                         var oofSound = createjs.Sound.play("oof");

@@ -30,7 +30,7 @@ var scenes;
             //instantiate a new Text object
             this._gameOverLabel = new objects.Label("Game Over", "80px", "Consolas", "#FFFFFF", 320, 180, true);
             // buttons
-            this._restartButton = new objects.Button("restartButton", 320, 430, true);
+            this._restartButton = new objects.Button("restartButton2", 320, 430, true);
             this._ocean = new objects.Ocean();
             this._scoreBoard = new managers.ScoreBoard();
             this._scoreBoard.HighScore = config.Game.HIGH_SCORE;
@@ -46,7 +46,7 @@ var scenes;
             this._restartButton.on("click", function () {
                 config.Game.LIVES = 5;
                 config.Game.SCORE = 0;
-                config.Game.SCENE = scenes.State.PLAY;
+                config.Game.SCENE = scenes.State.START;
             });
             this.addChild(this._scoreBoard.highScoreLabel);
         };

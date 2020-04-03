@@ -19,7 +19,7 @@ var objects;
         // PUBLIC PROPERTIES
         // CONSTRUCTOR
         function Enemy() {
-            var _this = _super.call(this, config.Game.TEXTURE_ATLAS, "placeholder", 0, 0, true) || this;
+            var _this = _super.call(this, config.Game.TEXTURE_ATLAS, "enemy", 0, 0, true) || this;
             _this.Start();
             return _this;
         }
@@ -71,8 +71,10 @@ var objects;
             var bullet = config.Game.ENEMY_BULLET.GetBullet();
             bullet.velocity.y = util.Mathf.RandomRange(5, 10);
             bullet.position = this._bulletSpawn;
-            var lightningSound = createjs.Sound.play("lightning");
-            lightningSound.volume = 0.1;
+            if (config.Game.SCENE != scenes.State.END) {
+                var lightningSound = createjs.Sound.play("lightning");
+                lightningSound.volume = 0.1;
+            }
         };
         Enemy.prototype.setTickSpeed = function (newSpeed) {
             this._tickSpeed = newSpeed;

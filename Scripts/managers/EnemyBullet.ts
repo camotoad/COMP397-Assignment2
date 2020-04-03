@@ -4,7 +4,7 @@ module managers
     {
         // PRIVATE INSTANCE MEMBERS
         private _bulletNumber: number;
-        private _bulletPool: Array<objects.Bullet>;
+        private _bulletPool: Array<objects.EnemyBullet>;
 
         // PUBLIC PROPERTIES
 
@@ -22,10 +22,10 @@ module managers
             this._bulletNumber = 15;
 
             // create an empty container
-            this._bulletPool = new Array<objects.Bullet>();
+            this._bulletPool = new Array<objects.EnemyBullet>();
 
             for (let count = 0; count < this._bulletNumber; count++) {
-                let bullet = new objects.Bullet();
+                let bullet = new objects.EnemyBullet();
                 this._bulletPool.push(bullet);
             }
         }
@@ -42,7 +42,7 @@ module managers
         
 
 
-        public GetBullet():objects.Bullet
+        public GetBullet():objects.EnemyBullet
         {
             // remove the bullet from the front of the pool
             let bullet = this._bulletPool.shift();

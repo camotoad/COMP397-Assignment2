@@ -19,7 +19,7 @@ var objects;
         // PUBLIC PROPERTIES
         // CONSTRUCTOR
         function Plane() {
-            var _this = _super.call(this, config.Game.TEXTURE_ATLAS, "plane", 0, 0, true) || this;
+            var _this = _super.call(this, config.Game.TEXTURE_ATLAS, "ship", 0, 0, true) || this;
             _this.Start();
             return _this;
         }
@@ -65,7 +65,7 @@ var objects;
             // this._engineSound = createjs.Sound.play("engine");
             // this._engineSound.loop = -1; // loop forever
             // this._engineSound.volume = 0.1; // 10% volume
-            this._horizontalSpeed = 10;
+            this._horizontalSpeed = 7;
             this.position = new objects.Vector2(config.Game.SCREEN_WIDTH * 0.5, this._verticalPosition);
         };
         Plane.prototype.Update = function () {

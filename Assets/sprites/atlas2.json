@@ -1,0 +1,37 @@
+{
+
+"images": [
+    "atlas2.png"
+],
+
+"framerate": 20,
+"frames": [
+    [1, 1, 5, 16, 0, 0, 0],
+    [8, 1, 21, 20, 0, 0, 0],
+    [31, 1, 150, 50, 0, 0, 0],
+    [183, 1, 57, 52, 0, 0, 0],
+    [1, 53, 150, 50, 0, 0, 0],
+    [153, 55, 95, 61, 0, 0, 0],
+    [1, 105, 150, 50, 0, 0, 0],
+    [153, 118, 65, 65, 0, 0, 0],
+    [1, 157, 150, 50, 0, 0, 0]
+],
+
+"animations": {
+    "laser": { "frames": [0] },
+    "ball1": { "frames": [1] },
+    "backButton2": { "frames": [2] },
+    "ship": { "frames": [3] },
+    "instructionsButton": { "frames": [4] },
+    "enemy": { "frames": [5] },
+    "restartButton2": { "frames": [6] },
+    "placeholder": { "frames": [7] },
+    "startButton2": { "frames": [8] }
+},
+
+"texturepacker": [
+        "SmartUpdateHash: $TexturePacker:SmartUpdate:eb6140a37d1bbb915471e1c8a8ce0452:9b232ae4a34e295b421ab1464bb7e24d:d2928af382b1462a4e1e9d203dd4c4a5$",
+        "Created with TexturePacker (https://www.codeandweb.com/texturepacker) for EaselJS"
+]
+
+}
