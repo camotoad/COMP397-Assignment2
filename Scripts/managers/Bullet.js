@@ -22,6 +22,8 @@ var managers;
         Bullet.prototype.AddBulletsToScene = function (scene) {
             this._bulletPool.forEach(function (bullet) {
                 scene.addChild(bullet);
+                var pewSound = createjs.Sound.play("pew");
+                pewSound.volume = 0.1;
             });
         };
         Bullet.prototype.GetBullet = function () {

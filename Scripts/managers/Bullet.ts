@@ -36,6 +36,8 @@ module managers
         {
             this._bulletPool.forEach(bullet => {
                 scene.addChild(bullet);
+                let pewSound = createjs.Sound.play("pew");
+                pewSound.volume = 0.1;
             });
         }
 

@@ -9,13 +9,13 @@ var Game = (function () {
     var currentScene;
     var assets;
     var textureAtlas;
-    var oceanAtlas;
+    var spaceAtlas;
     var assetManifest = [
-        { id: "ocean", src: "./Assets/images/ocean.gif" },
+        { id: "space", src: "./Assets/images/space.gif" },
         { id: "atlas", src: "./Assets/sprites/atlas.png" },
         { id: "engine", src: "./Assets/audio/engine.ogg" },
-        { id: "yay", src: "./Assets/audio/yay.ogg" },
-        { id: "thunder", src: "./Assets/audio/thunder.ogg" },
+        { id: "pew", src: "./Assets/audio/pew.mp3" },
+        { id: "boom", src: "./Assets/audio/boom.mp3" },
     ];
     var spriteData = {
         "images": {},
@@ -45,13 +45,13 @@ var Game = (function () {
             "startButton": { "frames": [9] }
         }
     };
-    var oceanData = {
+    var spaceData = {
         "images": {},
         "frames": [
             [0, 0, 640, 1440, 0, 0, 0],
         ],
         "animations": {
-            "ocean": { "frames": [0] },
+            "space": { "frames": [0] },
         }
     };
     function Preload() {
@@ -74,9 +74,9 @@ var Game = (function () {
         spriteData.images = [assets.getResult("atlas")];
         textureAtlas = new createjs.SpriteSheet(spriteData);
         config.Game.TEXTURE_ATLAS = textureAtlas;
-        oceanData.images = [assets.getResult("ocean")];
-        oceanAtlas = new createjs.SpriteSheet(oceanData);
-        config.Game.OCEAN_ATLAS = oceanAtlas;
+        spaceData.images = [assets.getResult("space")];
+        spaceAtlas = new createjs.SpriteSheet(spaceData);
+        config.Game.OCEAN_ATLAS = spaceAtlas;
         currentSceneState = scenes.State.NO_SCENE;
         config.Game.SCENE = scenes.State.START;
     }

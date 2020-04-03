@@ -39,9 +39,9 @@ module objects
             }
 
             //top boundary
-            if(this.position.y <= this.halfHeight)
+            if(this.position.y <= config.Game.SCREEN_HEIGHT/2)
             {
-                this.position = new Vector2(this.position.x, 100);
+                this.position = new Vector2(this.position.x, (config.Game.SCREEN_HEIGHT/2));
             }
 
             //bottom
@@ -114,7 +114,11 @@ module objects
         {
             let bullet = config.Game.BULLET_MANAGER.GetBullet();
             if (bullet.position.y < 0) // 1 bullet at a time
-            bullet.position = this._bulletSpawn;
+            {
+                bullet.position = this._bulletSpawn;
+                let pewSound = createjs.Sound.play("pew");
+                pewSound.volume = 0.1;
+               }         
         }
 
         

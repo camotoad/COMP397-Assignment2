@@ -59,6 +59,8 @@ module scenes
         if (managers.Collision.AABBCheck(this._bulletManager.GetBullet(), this._enemy))
         {
             console.log("Collision with enemy!");
+            let boomSound = createjs.Sound.play("boom");
+            boomSound.volume = 0.1;
             this._bulletManager.collisionReset(); //reset bullet when hit so the bullet does not rack up multiple points
             config.Game.SCORE_BOARD.Score += 200;
             if(config.Game.SCORE > config.Game.HIGH_SCORE)

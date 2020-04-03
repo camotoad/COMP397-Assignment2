@@ -41,8 +41,8 @@ var objects;
                 this.position = new objects.Vector2(config.Game.SCREEN_WIDTH - this.halfWidth, this.position.y);
             }
             //top boundary
-            if (this.position.y <= this.halfHeight) {
-                this.position = new objects.Vector2(this.position.x, 100);
+            if (this.position.y <= config.Game.SCREEN_HEIGHT / 2) {
+                this.position = new objects.Vector2(this.position.x, (config.Game.SCREEN_HEIGHT / 2));
             }
             //bottom
             if (this.position.y >= config.Game.SCREEN_HEIGHT - this.halfHeight) {
@@ -90,7 +90,11 @@ var objects;
         Plane.prototype.FireBullets = function () {
             var bullet = config.Game.BULLET_MANAGER.GetBullet();
             if (bullet.position.y < 0) // 1 bullet at a time
+             {
                 bullet.position = this._bulletSpawn;
+                var pewSound = createjs.Sound.play("pew");
+                pewSound.volume = 0.1;
+            }
         };
         return Plane;
     }(objects.GameObject));
